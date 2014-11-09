@@ -1,0 +1,144 @@
+name: SurvivalGames
+authors:
+  - Tagette
+  - duker02
+  - LegitModern
+website: http://dev.bukkit.org/server-mods/survival-games-x/
+description: A Survival Games plugin.
+main: net.shockverse.survivalgames.SurvivalGames
+version: 1.0.7
+database: false
+load: POSTWORLD
+depend: [Vault]
+
+commands:
+  survivalgames:
+    description: Type /sg help for help with this plugin.
+    usage:  You typed the command incorrectly.
+            For help type /sg help.
+    aliases: [sg, hg, hungergames]
+
+permissions:
+  survivalgames.*:
+    description: Gives access to everything.
+    children:
+      survivalgames.basic.timeleft: true
+      survivalgames.basic.list: true
+      survivalgames.basic.vote: true
+      survivalgames.basic.inventory: true
+      survivalgames.basic.top: true
+      survivalgames.basic.bounty: true
+      survivalgames.admin: true
+      survivalgames.admin.start: true
+      survivalgames.admin.stop: true
+      survivalgames.admin.deathmatch: true
+      survivalgames.admin.refill: true
+      survivalgames.admin.add: true
+      survivalgames.admin.enable: true
+      survivalgames.admin.disable: true
+      survivalgames.admin.edit: true
+      survivalgames.admin.edit.setspawn: true
+      survivalgames.admin.edit.delspawn: true
+      survivalgames.admin.login: true
+      survivalgames.admin.preventkick: true
+      survivalgames.admin.debug: true
+      survivalgames.admin.reload: true
+      survivalgames.admin.config: true
+      survivalgames.kickjoin: true
+  survivalgames.basic.*:
+    description: Gives access to all basic commands.
+    children:
+      survivalgames.basic.timeleft: true
+      survivalgames.basic.list: true
+      survivalgames.basic.vote: true
+      survivalgames.basic.inventory: true
+      survivalgames.basic.top: true
+      survivalgames.basic.bounty: true
+  survivalgames.admin.*:
+    description: Gives access to all game maker commands.
+    children:
+      survivalgames.admin: true
+      survivalgames.admin.start: true
+      survivalgames.admin.stop: true
+      survivalgames.admin.deathmatch: true
+      survivalgames.admin.refill: true
+      survivalgames.admin.add: true
+      survivalgames.admin.enable: true
+      survivalgames.admin.disable: true
+      survivalgames.admin.edit: true
+      survivalgames.admin.edit.setspawn: true
+      survivalgames.admin.edit.delspawn: true
+      survivalgames.admin.login: true
+      survivalgames.admin.preventkick: true
+      survivalgames.admin.debug: true
+      survivalgames.admin.reload: true
+      survivalgames.admin.config: true
+  survivalgames.basic.timeleft:
+    description: Shows the time left in the lobby, during the game or deathmatch.
+    default: true;
+  survivalgames.basic.list:
+    description: Shows a list of players.
+    default: true
+  survivalgames.basic.vote:
+    description: Allows the player to vote for the next arena.
+    default: true
+  survivalgames.basic.inventory:
+    description: Allows a spectator to view a tribute's inventory.
+    default: true
+  survivalgames.basic.top:
+    description: Allows a spectator to view a the top 5.
+    default: true
+  survivalgames.basic.bounty:
+    description: Allows a spectator to add bounty to a player.
+    default: true
+  survivalgames.admin:
+    description: Give access to misc admin stuff.
+    deafult: op
+  survivalgames.admin.start:
+    description: Allows a player to force a game start.
+    default: op
+  survivalgames.admin.stop:
+    description: Allows a player to force stop a game.
+    default: op
+  survivalgames.admin.deathmatch:
+    description: Allows a player to skip the game and enter the deathmatch.
+    default: op
+  survivalgames.admin.refill:
+    description: Allows a player to refill the chests in the map.
+    default: op
+  survivalgames.admin.add:
+    description: Allows a player to add an exteral player into the game.
+    default: op
+  survivalgames.admin.enable:
+    description: Allows a player to enable a world.
+    default: op
+  survivalgames.admin.disable:
+    description: Allows a player to disable a world.
+    default: op
+  survivalgames.admin.edit:
+    description: Allows a player to edit a world.
+    default: op
+  survivalgames.admin.edit.setspawn:
+    description: Allows a player to set spawns while editing a world.
+    default: op
+  survivalgames.admin.edit.delspawn:
+    description: Allows a player to delete spawns while editing a world.
+    default: op
+  survivalgames.admin.login:
+    description: Allows a player to login without being put into game queue.
+    default: op
+  survivalgames.admin.preventkick:
+    description: Allows a player to not be kicked by VIP users.
+    default: op
+  survivalgames.admin.debug:
+    description: Allows a player to enter debug mode.
+    default: op
+  survivalgames.admin.reload:
+    description: Allows a player to reload the plugin.
+    default: op
+  survivalgames.admin.config:
+    description: Allows a player to modify the config.
+    default: op
+  survivalgames.kickjoin:
+    description: Allows a player to join a full server.
+    default: op
