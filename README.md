@@ -1,5 +1,6 @@
 Survival Games X
-==============
+================
+
 The popular Survival Games X is finally open source as we prepare for a complete
 re-write as the team focuses on heavy optimization, a cleaner framework,
 polished and streamlined code, more events & efficient API for
@@ -16,3 +17,17 @@ that all pull requests are meeting our standards.
 
 We are excited for the future of Survival Games X! Thanks for the
 support over this past year.
+
+Building
+========
+
+1. Install [Gradle](http://gradle.org/) 2.1 or later.
+2. `gradle shadowJar`
+3. You'll find the jar in `build/libs`
+
+Modifying
+=========
+
+In IntelliJ IDEA, you can import the project by going to "Open" and selecting the build.gradle file.
+Upon doing this, IDEA will automatically download and set up the dependencies and libraries, and set
+up the SDK.

@@ -26,7 +26,7 @@ public class PropertyFile {
         String shortcut = entry.getKey();
         while(entry.getParent() != null 
                 && entry.getParent().getKey() != null) {
-            shortcut = entry.getParent().getKey() + "." + shortcut;
+            shortcut = entry.getParent().getKey() + "" + shortcut;
             entry = entry.getParent();
         }
         return shortcut;

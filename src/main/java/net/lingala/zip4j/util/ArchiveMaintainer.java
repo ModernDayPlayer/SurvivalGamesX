@@ -463,9 +463,9 @@ public class ArchiveMaintainer {
 				partFile = zipModel.getZipFile();
 			} else {
 				if (partNumber >= 9) {
-					partFile = curZipFile.substring(0, curZipFile.lastIndexOf(".")) + ".z" + (partNumber+ 1);
+					partFile = curZipFile.substring(0, curZipFile.lastIndexOf("")) + ".z" + (partNumber+ 1);
 				} else{
-					partFile = curZipFile.substring(0, curZipFile.lastIndexOf(".")) + ".z0" + (partNumber+ 1);
+					partFile = curZipFile.substring(0, curZipFile.lastIndexOf("")) + ".z0" + (partNumber+ 1);
 				}
 			}
 			File tmpFile = new File(partFile);
@@ -712,9 +712,9 @@ public class ArchiveMaintainer {
 					partFile = zipModel.getZipFile();
 				} else {
 					if (partNumber >= 9) {
-						partFile = curZipFile.substring(0, curZipFile.lastIndexOf(".")) + ".z" + (partNumber+ 1);
+						partFile = curZipFile.substring(0, curZipFile.lastIndexOf("")) + ".z" + (partNumber+ 1);
 					} else{
-						partFile = curZipFile.substring(0, curZipFile.lastIndexOf(".")) + ".z0" + (partNumber+ 1);
+						partFile = curZipFile.substring(0, curZipFile.lastIndexOf("")) + ".z0" + (partNumber+ 1);
 					}
 				}
 				
