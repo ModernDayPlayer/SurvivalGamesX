@@ -341,7 +341,7 @@ public class PropertyList extends PropertyEntry {
             if (entry instanceof PropertyList) {
                 list = (PropertyList) entry;
             } else {
-                Logger.warning("Trying to get PropList from " + key + ".");
+                Logger.warning("Trying to get PropList from " + key + "");
             }
             removeProperty(key);
         }

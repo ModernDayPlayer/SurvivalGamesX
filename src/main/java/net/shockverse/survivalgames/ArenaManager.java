@@ -1,17 +1,12 @@
 package net.shockverse.survivalgames;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.nio.channels.FileChannel;
-import java.nio.channels.FileLock;
-import java.util.*;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.model.ZipParameters;
 import net.lingala.zip4j.progress.ProgressMonitor;
-import net.minecraft.util.org.apache.commons.io.FileUtils;
-import net.minecraft.util.org.apache.commons.lang3.tuple.Pair;
-import net.shockverse.survivalgames.core.*;
+import net.shockverse.survivalgames.core.Language;
+import net.shockverse.survivalgames.core.Logger;
+import net.shockverse.survivalgames.core.Settings;
+import net.shockverse.survivalgames.core.Tools;
 import net.shockverse.survivalgames.data.ArenaData;
 import net.shockverse.survivalgames.data.ContainerData;
 import net.shockverse.survivalgames.data.RewardData;
@@ -20,15 +15,23 @@ import net.shockverse.survivalgames.extras.GameTask;
 import net.shockverse.survivalgames.extras.PropertyEntry;
 import net.shockverse.survivalgames.extras.PropertyFile;
 import net.shockverse.survivalgames.extras.PropertyList;
+import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.world.WorldUnloadEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 /**
  * @description Handles property files
@@ -1138,7 +1141,7 @@ public class ArenaManager extends HashMap<String, ArenaData> {
                 regionZip.setRunInThread(true);
                 //if (!regionFolder.exists())
                 	//regionFolder.mkdir();
-                regionZip.extractAll(".");
+                regionZip.extractAll("");
                 progressMonitors.put(worldName, regionZip.getProgressMonitor());
                 if(!settings.LowDetailMode)
                     Logger.info("        Finished extracting world zip '" + worldName + ".zip' in " + (System.currentTimeMillis() - startTime) + "ms.");

@@ -19,7 +19,7 @@ public class ReflectionUtil {
 
     static {
         String name = Bukkit.getServer().getClass().getPackage().getName(), mcVersion = name.substring(name.lastIndexOf('.') + 1);
-        version = mcVersion + ".";
+        version = mcVersion + "";
     }
 
     /**

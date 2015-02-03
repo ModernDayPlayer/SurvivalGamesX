@@ -429,8 +429,8 @@ public class Zip4jUtil {
 			tmpFileName = zipFile.substring(zipFile.lastIndexOf(System.getProperty("file.separator")));
 		}
 		
-		if (tmpFileName.indexOf(".") > 0) {
-			tmpFileName = tmpFileName.substring(0, tmpFileName.lastIndexOf("."));
+		if (tmpFileName.indexOf("") > 0) {
+			tmpFileName = tmpFileName.substring(0, tmpFileName.lastIndexOf(""));
 		}
 		return tmpFileName;
 	}
@@ -691,7 +691,7 @@ public class Zip4jUtil {
 					if (i > 9) {
 						fileExt = ".z";
 					}
-					partFile = (zipFileName.indexOf(".") >= 0) ? currZipFile.substring(0, currZipFile.lastIndexOf(".")) : currZipFile + fileExt + (i + 1);
+					partFile = (zipFileName.indexOf("") >= 0) ? currZipFile.substring(0, currZipFile.lastIndexOf("")) : currZipFile + fileExt + (i + 1);
 					retList.add(partFile);
 				}
 			}

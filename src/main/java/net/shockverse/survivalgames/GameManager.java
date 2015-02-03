@@ -1,22 +1,12 @@
 package net.shockverse.survivalgames;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.util.*;
-
-import net.shockverse.survivalgames.core.Language;
+import net.shockverse.survivalgames.core.*;
 import net.shockverse.survivalgames.core.Language.LangKey;
-import net.shockverse.survivalgames.core.Logger;
-import net.shockverse.survivalgames.core.Perms;
-import net.shockverse.survivalgames.core.Settings;
-import net.shockverse.survivalgames.core.Tools;
-import net.shockverse.survivalgames.core.Treasury;
 import net.shockverse.survivalgames.data.ArenaData;
 import net.shockverse.survivalgames.extras.FireworkEffectPlayer;
 import net.shockverse.survivalgames.extras.GameTask;
 import net.shockverse.survivalgames.extras.ItemUtils;
 import net.shockverse.survivalgames.extras.TaskManager;
-
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -25,12 +15,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
+import org.bukkit.scoreboard.*;
 import org.bukkit.util.Vector;
+
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 public class GameManager implements Listener {
     
@@ -363,7 +356,7 @@ public class GameManager implements Listener {
 
                 lang = Language.getLanguage(LangKey.scoreLobbyTime);
                 if(lang.length() > 16)
-                    lang = lang.substring(0, 14) + "..";
+                    lang = lang.substring(0, 14) + "src/main";
                 if(!Tools.isNullEmptyWhite(lang)) {
                     score = ob.getScore(Bukkit.getOfflinePlayer(lang));
                     if(nextGame > System.currentTimeMillis())
@@ -378,7 +371,7 @@ public class GameManager implements Listener {
                     Language.setVar("arenanumber", (arenaMan.arenaOrder.indexOf(key) + 1) + "");
                     lang = Language.getLanguage(LangKey.scoreVoteArena);
                     if(lang.length() > 16)
-                        lang = lang.substring(0, 14) + "..";
+                        lang = lang.substring(0, 14) + "src/main";
                     if(!Tools.isNullEmptyWhite(lang)) {
                         score = ob.getScore(Bukkit.getOfflinePlayer(lang));
                         score.setScore(plugin.getArenaManager().getVoteManager().totalVotes(key));
@@ -395,7 +388,7 @@ public class GameManager implements Listener {
 
                 lang = Language.getLanguage(LangKey.scoreGameTime);
                 if(lang.length() > 16)
-                    lang = lang.substring(0, 14) + "..";
+                    lang = lang.substring(0, 14) + "src/main";
                 if(!Tools.isNullEmptyWhite(lang)) {
                     score = ob.getScore(Bukkit.getOfflinePlayer(lang));
                     switch(STATE) {
@@ -410,7 +403,7 @@ public class GameManager implements Listener {
 
                 lang = Language.getLanguage(LangKey.scoreGameTributes);
                 if(lang.length() > 16)
-                    lang = lang.substring(0, 14) + "..";
+                    lang = lang.substring(0, 14) + "src/main";
                 if(!Tools.isNullEmptyWhite(lang)) {
                     score = ob.getScore(Bukkit.getOfflinePlayer(lang));
                     score.setScore(getTributeNames().size());
@@ -419,7 +412,7 @@ public class GameManager implements Listener {
 
                 lang = Language.getLanguage(LangKey.scoreGameSpectators);
                 if(lang.length() > 16)
-                    lang = lang.substring(0, 14) + "..";
+                    lang = lang.substring(0, 14) + "src/main";
                 if(!Tools.isNullEmptyWhite(lang)) {
                     score = ob.getScore(Bukkit.getOfflinePlayer(lang));
                     score.setScore(getSpectatorNames().size());
@@ -524,14 +517,7 @@ public class GameManager implements Listener {
             
             for(Entity entity : world.getEntities()) {
                 if(entity.getType() != EntityType.PLAYER) {
-                	if (version.equals("v1_7_R1"))
-                	//	((org.bukkit.craftbukkit.v1_7_R1.entity.CraftEntity)entity).getHandle().die();
-                	if (version.equals("v1_7_R2"))
-                	//	((org.bukkit.craftbukkit.v1_7_R2.entity.CraftEntity)entity).getHandle().die();
-                    if (version.equals("v1_7_R3"))
-                        ((org.bukkit.craftbukkit.v1_7_R3.entity.CraftEntity)entity).getHandle().die();
-                   // if (version.equals("v1_7_R4"))
-                   //     ((org.bukkit.craftbukkit.v1_7_R4.entity.CraftEntity)entity).getHandle().die();
+                    entity.remove();
                 }
             }
             
@@ -818,9 +804,10 @@ public class GameManager implements Listener {
         World world = plugin.getServer().getWorld(arenaMan.getCurrentArena().worldName);
         HashMap<Integer, List<Player>> joinLevels = new HashMap<Integer, List<Player>>();
         // Teleport even admins incase arena is disabling.
-        Player[] onlinePlayers = plugin.getServer().getOnlinePlayers();
-        for (int i = 0; i < onlinePlayers.length; i++) {
-            final Player p = onlinePlayers[i];
+        
+        int i = 0;
+        
+        for (Player p : plugin.getServer().getOnlinePlayers()) {
             if (p.hasPotionEffect(PotionEffectType.INVISIBILITY)) p.removePotionEffect(PotionEffectType.INVISIBILITY);
             if(p.getWorld() == world) {
                 // Set them to spectators
@@ -833,13 +820,14 @@ public class GameManager implements Listener {
                     joinLevels.get(joinLevel).add(p);
                 }
                 final String fName = p.getName();
+                final Player pp = p;
                 new GameTask(plugin, (int)(i / 5)) {
                     @Override
                     public void run() {
                         Player fPlayer = plugin.getServer().getPlayer(fName);
                         if(fPlayer != null) {
-                        	fPlayer.showPlayer(fPlayer);
-                        	p.teleport(plugin.getArenaManager().getLobby().spectatorSpawn);
+                            fPlayer.showPlayer(fPlayer);
+                            pp.teleport(plugin.getArenaManager().getLobby().spectatorSpawn);
                             if((plugin.getSettings().restartMinutes > 0
                                 && System.currentTimeMillis() > plugin.restartTime)
                                 || (plugin.getSettings().restartGames > 0 
@@ -891,6 +879,7 @@ public class GameManager implements Listener {
                     }
                 };
             }
+            i += 1;
         }
 
         plugin.getDebug().normal("Resetting game...");

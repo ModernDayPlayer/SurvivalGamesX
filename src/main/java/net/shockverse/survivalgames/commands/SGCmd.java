@@ -48,10 +48,10 @@ public class SGCmd implements CommandExecutor {
                         // Toggles debug mode for player.
                         if (!debug.isDebugging(getPlayer())) {
                             debug.startDebugging(getPlayer());
-                            sendMessage("You have entered debug mode for " + colorizeText(plugin.name, ChatColor.GREEN) + ".");
+                            sendMessage("You have entered debug mode for " + colorizeText(plugin.name, ChatColor.GREEN) + "");
                         } else if (args.length == 1) {
                             debug.stopDebugging(getPlayer());
-                            sendMessage("You have exited debug mode for " + colorizeText(plugin.name, ChatColor.GREEN) + ".");
+                            sendMessage("You have exited debug mode for " + colorizeText(plugin.name, ChatColor.GREEN) + "");
                             if (!debug.inDebugMode()) {
                                 Logger.info("Debug mode terminated.");
                             }
@@ -73,7 +73,7 @@ public class SGCmd implements CommandExecutor {
                             }
                             if (debugLevel != null) {
                                 debug.setDetailLevel(getPlayer(), debugLevel);
-                                sendMessage("You have set your debug detail to " + debugLevel.toString() + ".");
+                                sendMessage("You have set your debug detail to " + debugLevel.toString() + "");
                             }
                         }
                     }
@@ -83,7 +83,7 @@ public class SGCmd implements CommandExecutor {
                         debug.startDebugging();
                     } else if (args.length == 1) {
                         Logger.info("Debug mode terminated.");
-                        debug.stopDebugging("You have exited debug mode for " + colorizeText(plugin.name, ChatColor.GREEN) + ".");
+                        debug.stopDebugging("You have exited debug mode for " + colorizeText(plugin.name, ChatColor.GREEN) + "");
                     }
                     if (args.length == 2) {
                         DebugDetailLevel debugLevel = DebugDetailLevel.NORMAL;
@@ -240,7 +240,7 @@ public class SGCmd implements CommandExecutor {
 
             // Will send message only if the sender is a player.
             sendMessage("You are using " + colorizeText(plugin.name, ChatColor.GREEN)
-                    + " version " + colorizeText(plugin.version, ChatColor.GREEN) + " by " + plugin.getDescription().getAuthors() + ".");
+                    + " version " + colorizeText(plugin.version, ChatColor.GREEN) + " by " + plugin.getDescription().getAuthors() + "");
         } // This checks and runs the default commands. If the command is not a 
         //     default command then it continues to your commands.
         // There are 3 default commands: debug, reload and help.

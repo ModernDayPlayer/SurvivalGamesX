@@ -1,16 +1,8 @@
 package net.shockverse.survivalgames.listeners;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.regex.Matcher;
-
-import net.shockverse.survivalgames.GameManager.SGGameState;
 import net.shockverse.survivalgames.ArenaManager;
 import net.shockverse.survivalgames.GameManager;
+import net.shockverse.survivalgames.GameManager.SGGameState;
 import net.shockverse.survivalgames.PlayerStats;
 import net.shockverse.survivalgames.SurvivalGames;
 import net.shockverse.survivalgames.core.*;
@@ -18,7 +10,6 @@ import net.shockverse.survivalgames.core.Language.LangKey;
 import net.shockverse.survivalgames.data.ArenaData;
 import net.shockverse.survivalgames.data.ContainerData;
 import net.shockverse.survivalgames.extras.GameTask;
-
 import net.shockverse.survivalgames.extras.InventoryMenu;
 import net.shockverse.survivalgames.extras.ItemUtils;
 import org.bukkit.*;
@@ -40,6 +31,14 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.util.Vector;
+
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.regex.Matcher;
 
 /**
  * @description Handles all player related events
@@ -168,7 +167,7 @@ public class PlayerListener implements Listener {
         boolean adminLogin = Perms.has(p, "survivalgames.admin.login", p.isOp());
         boolean inGame = gameMan.getState() != SGGameState.LOBBY;
         Location spawn = aData.spectatorSpawn;
-        plugin.getDebug().normal(p.getName() + "'s kick join is " + joinLevel + ".");
+        plugin.getDebug().normal(p.getName() + "'s kick join is " + joinLevel + "");
         
         ev.setJoinMessage(null);
         p.getInventory().clear();
@@ -216,7 +215,7 @@ public class PlayerListener implements Listener {
         Player p = ev.getPlayer();
         GameManager gameMan = plugin.getGameManager();
         int kickJoinLevel = gameMan.getKickJoinLevel(p);
-        plugin.getDebug().normal(p.getName() + " login with join level " + kickJoinLevel + ".");
+        plugin.getDebug().normal(p.getName() + " login with join level " + kickJoinLevel + "");
         boolean adminLogin = Perms.has(p, "survivalgames.admin.login", p.isOp());
         int nonAdminsOnline = gameMan.getTributeNames().size() + gameMan.getSpectatorNames().size();
         
@@ -272,7 +271,7 @@ public class PlayerListener implements Listener {
             }
             plugin.getDebug().normal("Kick?");
             if(kickName != null) {
-                plugin.getDebug().normal("Trying to kick " + kickName + ".");
+                plugin.getDebug().normal("Trying to kick " + kickName + "");
                 Player toKick = plugin.getServer().getPlayer(kickName);
                 if(toKick != null) {
                     gameMan.removePlayer(toKick);
@@ -293,7 +292,7 @@ public class PlayerListener implements Listener {
                         toKick.kickPlayer(Language.getLanguage(LangKey.joinKick));
                     }
                 } else {
-                    plugin.getDebug().normal("Was unable to kick " + kickName + ".");
+                    plugin.getDebug().normal("Was unable to kick " + kickName + "");
                 }
                 Language.sendLanguage(p, LangKey.joinKickOther);
                 ev.setResult(Result.ALLOWED);
@@ -468,7 +467,7 @@ public class PlayerListener implements Listener {
                                                 "&b&l" + Bukkit.getPlayer(plugin.getGameManager().tributes.get(x)).getName(),
                                                 Arrays.asList(
                                                         "&7Click to spectate this player!", "&8&m------------------------",
-                                                        "&eHealth &l: &c" + (float) getPlayerHealth(Bukkit.getPlayer(plugin.getGameManager().tributes.get(x))) + " ❤",
+                                                        "&eHealth &l: &c" + (float) getPlayerHealth(Bukkit.getPlayer(plugin.getGameManager().tributes.get(x))) + " \u2764",
                                                         "&eHunger Level &l: &c" + Bukkit.getPlayer(plugin.getGameManager().tributes.get(x)).getFoodLevel(),
                                                         "&eSaturation Level &l: &c" + Bukkit.getPlayer(plugin.getGameManager().tributes.get(x)).getSaturation(), "&8&m------------------------",
                                                         "&eKills &l: &c" + stats.getKills(),
@@ -503,7 +502,7 @@ public class PlayerListener implements Listener {
                                                 "&b&l" + Bukkit.getPlayer(plugin.getGameManager().tributes.get(x)).getName(),
                                                 Arrays.asList(
                                                         "&7Click to spectate this player!", "&8&m------------------------",
-                                                        "&eHealth &l: &c" + (float) getPlayerHealth(Bukkit.getPlayer(plugin.getGameManager().tributes.get(x))) + " ❤",
+                                                        "&eHealth &l: &c" + (float) getPlayerHealth(Bukkit.getPlayer(plugin.getGameManager().tributes.get(x))) + " \u2764",
                                                         "&eHunger Level &l: &c" + Bukkit.getPlayer(plugin.getGameManager().tributes.get(x)).getFoodLevel(),
                                                         "&eSaturation Level &l: &c" + Bukkit.getPlayer(plugin.getGameManager().tributes.get(x)).getSaturation(), "&8&m------------------------",
                                                         "&eKills &l: &c" + stats.getKills(),
@@ -563,19 +562,19 @@ public class PlayerListener implements Listener {
     }
     
     private void openContainer(Block clickedBlock, Player player) {
-        plugin.getDebug().normal("Container clicked at " + clickedBlock.getLocation() + ".");
+        plugin.getDebug().normal("Container clicked at " + clickedBlock.getLocation() + "");
         Inventory inventory = ((InventoryHolder) clickedBlock.getState()).getInventory();
         if(plugin.getArenaManager().canFillContainer(clickedBlock)) {
             plugin.getArenaManager().clearContainer(clickedBlock);
             plugin.getArenaManager().fillContainer(clickedBlock, inventory);
-            plugin.getDebug().normal("    Container filled at " + clickedBlock.getLocation() + ".");
+            plugin.getDebug().normal("    Container filled at " + clickedBlock.getLocation() + "");
             PlayerStats stats = plugin.getStatManager().getPlayer(player.getName());
             stats.setContainersLooted(stats.getContainersLooted() + 1, true);
         }
     }
     
     private void openBlock(Block clickedBlock, Player player, String title) {
-        plugin.getDebug().normal(clickedBlock.getType() + " clicked at " + clickedBlock.getLocation() + ".");
+        plugin.getDebug().normal(clickedBlock.getType() + " clicked at " + clickedBlock.getLocation() + "");
         Inventory inventory;
         if(plugin.getArenaManager().lootedContainers.containsKey(clickedBlock))
             inventory = plugin.getArenaManager().lootedContainers.get(clickedBlock);
@@ -584,7 +583,7 @@ public class PlayerListener implements Listener {
         if(plugin.getArenaManager().canFillContainer(clickedBlock)) {
             plugin.getArenaManager().clearContainer(clickedBlock);
             plugin.getArenaManager().fillContainer(clickedBlock, inventory);
-            plugin.getDebug().normal("    Container filled at " + clickedBlock.getLocation() + ".");
+            plugin.getDebug().normal("    Container filled at " + clickedBlock.getLocation() + "");
             PlayerStats stats = plugin.getStatManager().getPlayer(player.getName());
             stats.setContainersLooted(stats.getContainersLooted() + 1, true);
         }

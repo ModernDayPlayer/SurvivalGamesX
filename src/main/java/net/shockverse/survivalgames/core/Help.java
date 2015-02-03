@@ -41,7 +41,7 @@ public class Help {
 
     public static void registerHelp() {
         // Generic command help.
-        register("sg help", "Shows the commands for " + plugin.name + ".");
+        register("sg help", "Shows the commands for " + plugin.name + "");
         if(Constants.debugAllowed)
             register("sg debug", "Puts you and " + plugin.name + " into debug mode.", "survivalgames.admin.debug");
         register("sg reload", "Reloads the config files.", "survivalgames.admin.reload");

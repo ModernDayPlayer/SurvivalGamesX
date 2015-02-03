@@ -1,14 +1,15 @@
 package net.shockverse.survivalgames.core;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import net.minecraft.util.org.apache.commons.lang3.tuple.MutablePair;
-import net.minecraft.util.org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.util.Vector;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * @description Useful tools

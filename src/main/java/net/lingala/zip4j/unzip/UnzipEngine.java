@@ -367,9 +367,9 @@ public class UnzipEngine {
 				partFile = zipModel.getZipFile();
 			} else {
 				if (diskNumberStartOfFile >= 9) {
-					partFile = curZipFile.substring(0, curZipFile.lastIndexOf(".")) + ".z" + (diskNumberStartOfFile+ 1);
+					partFile = curZipFile.substring(0, curZipFile.lastIndexOf("")) + ".z" + (diskNumberStartOfFile+ 1);
 				} else{
-					partFile = curZipFile.substring(0, curZipFile.lastIndexOf(".")) + ".z0" + (diskNumberStartOfFile+ 1);
+					partFile = curZipFile.substring(0, curZipFile.lastIndexOf("")) + ".z0" + (diskNumberStartOfFile+ 1);
 				}
 			}
 			
@@ -453,9 +453,9 @@ public class UnzipEngine {
 			partFile = zipModel.getZipFile();
 		} else {
 			if (currSplitFileCounter >= 9) {
-				partFile = currZipFile.substring(0, currZipFile.lastIndexOf(".")) + ".z" + (currSplitFileCounter + 1);
+				partFile = currZipFile.substring(0, currZipFile.lastIndexOf("")) + ".z" + (currSplitFileCounter + 1);
 			} else {
-				partFile = currZipFile.substring(0, currZipFile.lastIndexOf(".")) + ".z0" + (currSplitFileCounter + 1);
+				partFile = currZipFile.substring(0, currZipFile.lastIndexOf("")) + ".z0" + (currSplitFileCounter + 1);
 			}
 		}
 		currSplitFileCounter++;
